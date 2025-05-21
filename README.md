@@ -1,44 +1,61 @@
-# Nanyanya
-[Figma](https://www.figma.com/design/xDqzNQ8XAzME0slYTKwjUX/Nanyanya?node-id=0-1&t=ghXLgpj0SrmOVM7J-1) | [Trello](https://trello.com/invite/b/67b9cc3e0671324c1df80e00/ATTI460712c925907d89575f66e77d5ff5a1AAA45DFA/rpl-kelompok-5) | [Formal Document](https://docs.google.com/document/d/1iB67vTSJZnU37vcEuYlXQ_PPENWRjMf1C7oUduMxCSw/edit?tab=t.0) | [Userflow](https://app.diagrams.net/#Hagw2005%2Fnanyanya%2Fmain%2Fuserflow.drawio#%7B%22pageId%22%3A%22C5RBs43oDa-KdzZeNtuy%22%7D)
-___
-"Nanyanya" adalah platform web yang memungkinkan pengguna untuk menyelenggarakan kuis bagi pengguna lain untuk ikut serta dalam kuis tersebut. Pengguna dapat membuat kuesioner mereka sendiri, baik public atau limited, atau ikut serta dalam kuis buatan pengguna lainnya. Situs web Nanyanya dapat digunakan oleh para pendidik untuk menyelenggarakan kuis bagi siswa, juga dapat digunakan untuk siswa dalam membuat flashcard sebagai alat active-recalling, untuk statistikawan sebagai medium penyelenggara survey  atau bagi siapa saja untuk membuat kuis rekreasional.
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-# Commit Guidelines
-This project uses the form of type `[PURPOSE]([SCOPE]):[MESSAGE]`
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-`[PURPOSE]` refers to the purpose of the commit, the content is according to the table below.
-| PURPOSE-value | Description |
-|----------|----------|
-| feat   | When changes adds a new feature or functionality   |
-| fix   | When changes fixes a bug in the codebase   |
-| chore   | When changes doesn't affect code logic, such as updating dependencies, CI/CD configurations, or scripts   |
-| refactor   | When changes improve the code without changing functionality   |
-| docs   | When the changes updates the documentation   |
+## About Laravel
 
-`[SCOPE]` indicates the name of the file(s) that is changed.
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-`[MESSAGE]` is a short summary plus occasionally a long explanation or reference to other relative issues
-```bash
-# Good commit message following conventional guidelines
-git commit -m "feat(auth.js): add JWT-based authentication"
-git commit -m "fix(login.jsx): resolve race condition in login flow"
-```
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-## 2. Atomic & Focused
-Do not mix several independent changes in one commit.
-```bash
-# Good commit
-git commit -m "Add user authentication"
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-# Bad commit
-git commit -m "Add user authentication AND update UI styles"
-```
+## Learning Laravel
 
-## 3. Descriptive Message
-What the commit does and why the change was made.
-```bash
-# Good commit message
-git commit -m "Fix Correct null pointer exception in user login"
-# Bad commit message
-git commit -m "Fix bug"
-```
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+
+You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+
+## Laravel Sponsors
+
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+
+### Premium Partners
+
+- **[Vehikl](https://vehikl.com)**
+- **[Tighten Co.](https://tighten.co)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
+- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+- **[Redberry](https://redberry.international/laravel-development)**
+- **[Active Logic](https://activelogic.com)**
+
+## Contributing
+
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+
+## Code of Conduct
+
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+
+## Security Vulnerabilities
+
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+
+## License
+
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
