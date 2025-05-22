@@ -16,7 +16,12 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Index() {
+    const [quizName, setQuizName] = useState('');
+    const [thumbnailUrl, setThumbnailUrl] = useState<string>('');
     const [questionCount, setQuestionCount] = useState(2); // default 2 questions
+    const [questions, setQuestions] = useState<Record<number, string>>({});
+    const [correctAnswers, setCorrectAnswers] = useState<Record<number, string>>({});
+    const [options, setOptions] = useState<Record<number, Record<string, string>>>({});
 
     const handleQuestionCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = parseInt(e.target.value, 10);
@@ -25,19 +30,39 @@ export default function Index() {
         }
     };
 
-    const [correctAnswers, setCorrectAnswers] = useState<Record<number, string>>({});
-    const [thumbnailUrl, setThumbnailUrl] = useState<string>('');
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        const payload = {
+            name: quizName,
+            thumbnail_url: thumbnailUrl,
+            questions: Array.from({ length: questionCount }).map((_, index) => {
+                const opts = options[index] || {};
+                return {
+                    question_text: questions[index] || '',
+                    options: ['A', 'B', 'C', 'D'].map((label) => ({
+                        label,
+                        option_text: opts[label] || '',
+                        is_correct: correctAnswers[index] === label,
+                    })),
+                };
+            }),
+        };
+
+        console.log('Quiz Payload:', payload);
+    };
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Make new quiz" />
-            <div>
-                <form action="">
-                    <div>
+            <div className="m-10">
+                <form onSubmit={handleSubmit}>
+                    <div className="mt-1 pt-1">
                         <Label htmlFor="Quiz name">Quiz Name</Label>
-                        <Input placeholder="Ex: PyTorch Exam"></Input>
+                        <Input id="quiz-name" value={quizName} onChange={(e) => setQuizName(e.target.value)} placeholder="Ex: PyTorch Exam" />
                     </div>
-                    <div>
+
+                    <div className="mt-1 pt-1">
                         <Label htmlFor="Quiz thumbnail">Quiz Thumbnail URL</Label>
                         <Input
                             id="quiz-thumbnail-url"
@@ -54,7 +79,8 @@ export default function Index() {
                             </div>
                         </div>
                     )}
-                    <div>
+
+                    <div className="mt-1 pt-1">
                         <Label htmlFor="Quiz question quantity">Questions Quantity</Label>
                         <Input
                             id="questions-quantity"
@@ -64,15 +90,26 @@ export default function Index() {
                             placeholder="Ex: 10"
                         />
                     </div>
+
                     {Array.from({ length: questionCount }).map((_, index) => (
-                        <div key={index}>
+                        <div key={index} className="mt-4 pt-4">
                             <div>
                                 <Label htmlFor={`question-${index}`}>Question {index + 1} - Question</Label>
-                                <Textarea id={`question-${index}`} placeholder={`Ex: What is ${index}+${index}?`} />
+                                <Textarea
+                                    id={`question-${index}`}
+                                    placeholder={`Ex: What is ${index}+${index}?`}
+                                    value={questions[index] || ''}
+                                    onChange={(e) =>
+                                        setQuestions((prev) => ({
+                                            ...prev,
+                                            [index]: e.target.value,
+                                        }))
+                                    }
+                                />
                             </div>
                             {['A', 'B', 'C', 'D'].map((option) => (
                                 <div key={option}>
-                                    <div>
+                                    <div className="flex items-center gap-2">
                                         <Label htmlFor={`question-${index}-option-${option}`}>
                                             Question {index + 1} - Option {option}
                                         </Label>
@@ -88,12 +125,28 @@ export default function Index() {
                                             Correct Answer
                                         </Toggle>
                                     </div>
-                                    <Input id={`question-${index}-option-${option}`} placeholder={`Option ${option}`} />
+                                    <Input
+                                        id={`question-${index}-option-${option}`}
+                                        placeholder={`Option ${option}`}
+                                        value={options[index]?.[option] ?? ''}
+                                        onChange={(e) =>
+                                            setOptions((prev) => ({
+                                                ...prev,
+                                                [index]: {
+                                                    ...(prev[index] || {}),
+                                                    [option]: e.target.value,
+                                                },
+                                            }))
+                                        }
+                                    />
                                 </div>
                             ))}
                         </div>
                     ))}
-                    <Button type="submit">Create Quiz</Button>
+
+                    <Button type="submit" className="mt-4">
+                        Create Quiz
+                    </Button>
                 </form>
             </div>
         </AppLayout>
