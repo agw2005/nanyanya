@@ -15,6 +15,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
     Route::get('/make', [MakeQuizController::class, 'index'])->name('make-quiz.index');
+    Route::post('/make', [MakeQuizController::class, 'store'])->name('make-quiz.store');
     Route::get('/quiz-taken', [QuizTakenController::class, 'index'])->name('quiz-taken.index');
     Route::get('/quiz-created', [QuizCreatedController::class, 'index'])->name('quiz-created.index');
 });

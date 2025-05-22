@@ -5,7 +5,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Toggle } from '@/components/ui/toggle';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
-import { Head } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import { useState } from 'react';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -50,6 +50,7 @@ export default function Index() {
         };
 
         console.log('Quiz Payload:', payload);
+        router.post('/make', payload);
     };
 
     return (
