@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MakeQuizController;
 use App\Http\Controllers\QuizOverviewController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -15,6 +16,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
     Route::get('/make', [MakeQuizController::class, 'index'])->name('make-quiz.index');
     Route::get('/overview', [QuizOverviewController::class, 'index'])->name('quiz-overview.index');
+    Route::get('/notification', [NotificationController::class, 'index'])->name('quiz-overview.index');
 });
 
 require __DIR__.'/settings.php';
