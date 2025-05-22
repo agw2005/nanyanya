@@ -1,4 +1,3 @@
-import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
@@ -26,7 +25,12 @@ export default function Dashboard() {
                         onClick={() => setSelectedBox(idx)}
                         className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-[2/1] cursor-pointer overflow-hidden rounded-xl border"
                     >
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+                        {/* <img
+                            src={`https://via.placeholder.com/400x200?text=Quiz+${idx + 1}`}
+                            alt={`Quiz ${idx + 1}`}
+                            className="absolute inset-0 size-full object-cover"
+                        /> */}
+                        <img src={'placeholder-image.jpg'} alt={`Quiz ${idx + 1}`} className="absolute inset-0 size-full object-cover" />
                     </div>
                 ))}
             </div>
@@ -38,7 +42,7 @@ export default function Dashboard() {
                         onClick={(e) => e.stopPropagation()} // Prevent modal close on click inside
                     >
                         <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-[2/1] overflow-hidden rounded-xl border">
-                            <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+                            <img src={'placeholder-image.jpg'} className="absolute inset-0 size-full object-cover" />
                         </div>
                         <div className="mt-6 grid grid-cols-4 gap-4">
                             <button className="rounded bg-blue-500 py-2 text-white">[Quiz Maker]</button>
