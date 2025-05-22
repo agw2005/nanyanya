@@ -13,11 +13,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        \App\Models\User::truncate();
+        \App\Models\Quiz::truncate();
+        \App\Models\Question::truncate();
+        \App\Models\Option::truncate();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->call([
+            QuizzesSeeder::class,
         ]);
     }
 }
