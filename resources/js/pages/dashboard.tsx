@@ -3,8 +3,6 @@ import { type BreadcrumbItem } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 
-const boxes = new Array(20).fill(0);
-
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Dashboard',
