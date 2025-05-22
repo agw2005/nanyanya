@@ -67,5 +67,96 @@ class QuizzesSeeder extends Seeder
                 ]);
             }
         }
+
+        // 4. Repeat step 2 and 3
+        $quiz = Quiz::create([
+            'user_id' => $user->id,
+            'name' => 'Sample Quiz 2',
+            'thumbnail_url' => 'https://picsum.photos/id/2/500/300',
+        ]);
+
+        $questionsData = [
+            [
+                'question_text' => 'What is a spider?',
+                'options' => [
+                    ['label' => 'A', 'option_text' => 'Insect', 'is_correct' => false],
+                    ['label' => 'B', 'option_text' => 'Man', 'is_correct' => false],
+                    ['label' => 'C', 'option_text' => 'Arachnid', 'is_correct' => true],
+                    ['label' => 'D', 'option_text' => 'Mollusc', 'is_correct' => false],
+                ],
+            ],
+            [
+                'question_text' => 'Which is not a president of america?',
+                'options' => [
+                    ['label' => 'A', 'option_text' => 'Emanuel', 'is_correct' => true],
+                    ['label' => 'B', 'option_text' => 'Eisenhower', 'is_correct' => false],
+                    ['label' => 'C', 'option_text' => 'Nixon', 'is_correct' => false],
+                    ['label' => 'D', 'option_text' => 'Obama', 'is_correct' => false],
+                ],
+            ],
+        ];
+
+        foreach ($questionsData as $index => $qData) {
+            $question = Question::create([
+                'quiz_id' => $quiz->id,
+                'question_text' => $qData['question_text'],
+                'question_order' => $index + 1,
+            ]);
+
+            foreach ($qData['options'] as $opt) {
+                Option::create([
+                    'question_id' => $question->id,
+                    'label' => $opt['label'],
+                    'option_text' => $opt['option_text'],
+                    'is_correct' => $opt['is_correct'],
+                ]);
+            }
+        }
+
+        // 5. Repeat it one last time
+        $quiz = Quiz::create([
+            'user_id' => $user->id,
+            'name' => 'Sample Quiz 3',
+            'thumbnail_url' => 'https://picsum.photos/id/3/500/300',
+        ]);
+        
+        $questionsData = [
+            [
+                'question_text' => 'Which one is a round number?',
+                'options' => [
+                    ['label' => 'A', 'option_text' => '3.14', 'is_correct' => false],
+                    ['label' => 'B', 'option_text' => '2.17', 'is_correct' => false],
+                    ['label' => 'C', 'option_text' => '98', 'is_correct' => true],
+                    ['label' => 'D', 'option_text' => 'i', 'is_correct' => false],
+                ],
+            ],
+            [
+                'question_text' => 'Which is not an anime?',
+                'options' => [
+                    ['label' => 'A', 'option_text' => 'Avatar: The last airbender', 'is_correct' => true],
+                    ['label' => 'B', 'option_text' => 'Attack on Titan', 'is_correct' => false],
+                    ['label' => 'C', 'option_text' => 'Ultraman Rising', 'is_correct' => false],
+                    ['label' => 'D', 'option_text' => 'Pokemon: Indigo League', 'is_correct' => false],
+                ],
+            ],
+        ];
+
+        foreach ($questionsData as $index => $qData) {
+            $question = Question::create([
+                'quiz_id' => $quiz->id,
+                'question_text' => $qData['question_text'],
+                'question_order' => $index + 1,
+            ]);
+
+            foreach ($qData['options'] as $opt) {
+                Option::create([
+                    'question_id' => $question->id,
+                    'label' => $opt['label'],
+                    'option_text' => $opt['option_text'],
+                    'is_correct' => $opt['is_correct'],
+                ]);
+            }
+        }
+
     }
 }
