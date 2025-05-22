@@ -26,6 +26,7 @@ export default function Index() {
     };
 
     const [correctAnswers, setCorrectAnswers] = useState<Record<number, string>>({});
+    const [thumbnailUrl, setThumbnailUrl] = useState<string>('');
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -36,10 +37,23 @@ export default function Index() {
                         <Label htmlFor="Quiz name">Quiz Name</Label>
                         <Input placeholder="Ex: PyTorch Exam"></Input>
                     </div>
-                    {/* <div>
-                        <Label htmlFor="Quiz thumbnail">Quiz Thumbnail</Label>
-                        <Input placeholder="jpeg or png"></Input>
-                    </div> */}
+                    <div>
+                        <Label htmlFor="Quiz thumbnail">Quiz Thumbnail URL</Label>
+                        <Input
+                            id="quiz-thumbnail-url"
+                            type="text"
+                            value={thumbnailUrl}
+                            onChange={(e) => setThumbnailUrl(e.target.value)}
+                            placeholder="https://picsum.photos/id/237/500/300"
+                        />
+                    </div>
+                    {thumbnailUrl && (
+                        <div className="mt-2">
+                            <div className="relative mt-2 aspect-[2/1] w-full max-w-md overflow-hidden rounded border">
+                                <img src={thumbnailUrl} alt="Quiz Thumbnail" className="absolute inset-0 size-full object-cover" />
+                            </div>
+                        </div>
+                    )}
                     <div>
                         <Label htmlFor="Quiz question quantity">Questions Quantity</Label>
                         <Input
@@ -67,7 +81,7 @@ export default function Index() {
                                             onClick={() => {
                                                 setCorrectAnswers((prev) => ({
                                                     ...prev,
-                                                    [index]: option,    
+                                                    [index]: option,
                                                 }));
                                             }}
                                         >
