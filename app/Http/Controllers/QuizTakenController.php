@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class QuizOverviewController extends Controller
+class QuizTakenController extends Controller
 {
     public function index(){
-        return Inertia::render('Overview/Index', []);
+        return Inertia::render('QuizTaken/Index', []);
     }
 }

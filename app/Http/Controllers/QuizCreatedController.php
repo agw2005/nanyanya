@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class NotificationController extends Controller
+class QuizCreatedController extends Controller
 {
     public function index(){
-        return Inertia::render('Notification/Index', []);
+        return Inertia::render('QuizCreated/Index', []);
     }
 }

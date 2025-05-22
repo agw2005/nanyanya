@@ -6,8 +6,8 @@ import { Head } from '@inertiajs/react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Quiz overview',
-        href: '/overview',
+        title: 'Quiz taken',
+        href: '/quiz-taken',
     },
 ];
 
@@ -16,7 +16,7 @@ const boxes = new Array(20).fill(0); // Example with 20 components
 export default function Index() {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Quiz Overview" />
+            <Head title="Quiz Taken" />
 
             <div>
                 <Toggle>Created Quiz</Toggle>
