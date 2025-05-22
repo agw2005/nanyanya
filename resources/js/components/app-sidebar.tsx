@@ -4,7 +4,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { Bell, BookCheck, BookOpen, Folder, LayoutGrid, SquarePlus } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -12,6 +12,21 @@ const mainNavItems: NavItem[] = [
         title: 'Dashboard',
         url: '/dashboard',
         icon: LayoutGrid,
+    },
+    {
+        title: 'Make new quiz',
+        url: '/make',
+        icon: SquarePlus,
+    },
+    {
+        title: 'Quiz overview',
+        url: '/overview',
+        icon: BookCheck,
+    },
+    {
+        title: 'Notifications',
+        url: '/notification',
+        icon: Bell,
     },
 ];
 
