@@ -50,4 +50,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Quiz::class, 'quiz_user_likes')->withTimestamps();
     }
 
+    public function answers() {
+        return $this->hasMany(Answer::class);
+    }    
+
 }
