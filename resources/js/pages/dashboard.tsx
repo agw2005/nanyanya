@@ -1,6 +1,6 @@
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
-import { Head, usePage } from '@inertiajs/react';
+import { Head, router, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -14,6 +14,9 @@ type Quiz = {
     id: number;
     name: string;
     thumbnail_url: string | null;
+    liked: boolean;
+    liked_by_users_count: number;
+    maker_name: string;
 };
 
 type Props = {
@@ -21,6 +24,17 @@ type Props = {
 };
 
 export default function Dashboard() {
+    const handleLike = (quizId: number) => {
+        router.post(
+            `/quizzes/${quizId}/like`,
+            {},
+            {
+                preserveScroll: true,
+                only: ['quizzes'],
+            },
+        );
+    };
+
     const { props } = usePage<Props>();
     const quizzes: Quiz[] = props.quizzes || [];
     const [selectedQuizId, setSelectedQuizId] = useState<number | null>(null);
@@ -60,10 +74,17 @@ export default function Dashboard() {
                             />
                         </div>
                         <div className="mt-6 grid grid-cols-4 gap-4">
-                            <button className="rounded bg-blue-500 py-2 text-white">[Quiz Maker]</button>
+                            <button className="rounded bg-blue-500 py-2 text-white">{selectedQuiz.maker_name}</button>
                             <button className="rounded bg-green-500 py-2 text-white">Participate</button>
-                            <button className="rounded bg-yellow-500 py-2 text-white">Like</button>
-                            <button className="rounded bg-red-500 py-2 text-white">Likes : 52k</button>
+                            <button
+                                className={`rounded py-2 text-white ${selectedQuiz.liked ? 'bg-yellow-500' : 'bg-gray-400'}`}
+                                onClick={() => handleLike(selectedQuiz.id)}
+                            >
+                                {selectedQuiz.liked ? 'Unlike' : 'Like'}
+                            </button>
+                            <button className="rounded bg-red-500 py-2 text-white">
+                                Likes: {selectedQuiz.liked_by_users_count.toLocaleString()}
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\QuizCreatedController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\QuizLikeController;
 
 Route::get('/', function () {
     return Inertia::render('welcome');
@@ -17,6 +18,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/make', [MakeQuizController::class, 'store'])->name('make-quiz.store');
     Route::get('/quiz-taken', [QuizTakenController::class, 'index'])->name('quiz-taken.index');
     Route::get('/quiz-created', [QuizCreatedController::class, 'index'])->name('quiz-created.index');
+    Route::post('/quizzes/{quiz}/like', [QuizLikeController::class, 'toggle'])->middleware('auth');
 });
 
 require __DIR__.'/settings.php';

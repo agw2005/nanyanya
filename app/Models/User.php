@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function likedQuizzes(){
+        return $this->belongsToMany(Quiz::class, 'quiz_user_likes')->withTimestamps();
+    }
+
 }
