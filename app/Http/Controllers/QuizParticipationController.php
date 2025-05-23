@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Quiz;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class QuizParticipationController extends Controller
 {
+    public function index(){
+        return Inertia::render('Participate/Index', []);
+    }
+
     public function show(Quiz $quiz){
         $quiz->load(['questions.options']); // Assuming you have `options()` in Question model
 
