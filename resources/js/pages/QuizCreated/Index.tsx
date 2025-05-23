@@ -1,7 +1,7 @@
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -9,7 +9,6 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: '/quiz-created',
     },
 ];
-const boxes = new Array(20).fill(0); // Example with 20 components
 
 type User = {
     id: number;
@@ -40,9 +39,6 @@ export default function Index() {
     const quizzes: Quiz[] = props.quizzes || [];
     const [selectedQuizId, setSelectedQuizId] = useState<number | null>(null);
     const selectedQuiz = quizzes.find((q) => q.id === selectedQuizId) || null;
-    useEffect(() => {
-        console.log(selectedQuiz);
-    }, [selectedQuiz]);
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
