@@ -1,46 +1,66 @@
-import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
-import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
+import { cn } from '@/lib/utils';
+import React, { useState } from 'react';
 
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Participate',
-        href: '/participate',
-    },
+const answers = [
+  'Answer A',
+  'Answer B',
+  'Answer C',
+  'Answer D',
 ];
 
-const boxes = new Array(20).fill(0); // Example with 20 components
-
 export default function Index() {
-    return (
-        <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Participating a quiz" />
+  const [selected, setSelected] = useState<number | null>(null);
+  const [uncertain, setUncertain] = useState(false);
 
-            <div className="flex h-[calc(100vh-100px)] flex-1 flex-col gap-4 rounded-xl p-4">
-                {/* Info section – only takes needed height */}
-                <div className="shrink-0">
-                    <p>Quiz name : PyTorch Exam</p>
-                    <p>Quiz maker : Dicky</p>
-                    <p>Number of questions : 10</p>
-                    <p>Correct answers : 5</p>
-                    <p>Score : 50%</p>
-                </div>
-
-                {/* Scrollable box grid – takes remaining height */}
-                <div className="flex-1 overflow-auto">
-                    <div className="grid grid-cols-4 gap-4">
-                        {boxes.map((_, idx) => (
-                            <div
-                                key={idx}
-                                className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-[2/1] overflow-hidden rounded-xl border"
-                            >
-                                <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                            </div>
-                        ))}
-                    </div>
-                </div>
+  return (
+    <AppLayout breadcrumbs={[{ title: 'Participate', href: '/participate' }]}> 
+      <Head title="Participating a quiz" />
+      <div className="flex h-[calc(100vh-100px)] w-full bg-[#444] p-4 gap-4 rounded-xl">
+        {/* Sidebar */}
+        <div className="flex flex-col items-center bg-[#999] rounded-lg w-40 min-w-[120px] p-4">
+          <span className="font-bold text-lg mb-2">Daftar Soal</span>
+        </div>
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col bg-[#aaa] rounded-lg p-6 gap-4">
+          {/* Question Section */}
+          <div className="flex flex-row items-start justify-between mb-4">
+            <div className="flex-1 flex items-center justify-center">
+              <span className="text-3xl font-bold">Questions</span>
             </div>
-        </AppLayout>
-    );
+            <div className="flex flex-col items-end gap-2">
+              <div className="flex items-center gap-2">
+                <Checkbox id="uncertain" checked={uncertain} onCheckedChange={v => setUncertain(!!v)} />
+                <Label htmlFor="uncertain" className="text-lg font-semibold">Uncertain</Label>
+              </div>
+              <div className="flex gap-2">
+                <Button variant="outline" size="icon" aria-label="Previous question">{'<'} </Button>
+                <Button variant="outline" size="icon" aria-label="Next question">{'>'} </Button>
+              </div>
+            </div>
+          </div>
+          {/* Answers */}
+          <div className="flex flex-col gap-3 mt-2">
+            {answers.map((ans, idx) => (
+              <Card
+                key={ans}
+                className={cn(
+                  'w-full px-6 py-4 text-2xl font-bold cursor-pointer transition-colors',
+                  selected === idx ? 'bg-[#888] border-2 border-black' : 'bg-[#aaa] border border-black',
+                )}
+                onClick={() => setSelected(idx)}
+              >
+                {ans}
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+    </AppLayout>
+  );
 }
