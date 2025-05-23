@@ -1,8 +1,7 @@
-import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
-import { Toggle } from '@/components/ui/toggle';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
-import { Head } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -12,7 +11,39 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 const boxes = new Array(20).fill(0); // Example with 20 components
 
+type User = {
+    id: number;
+    name: string;
+    email: string;
+};
+
+type Question = {
+    id: number;
+    question_text: string;
+    options: any[]; // optionally type this
+};
+
+type Quiz = {
+    id: number;
+    name: string;
+    thumbnail_url: string | null;
+    user: User;
+    questions: Question[];
+};
+
+type Props = {
+    quizzes: Quiz[];
+};
+
 export default function Index() {
+    const { props } = usePage<Props>();
+    const quizzes: Quiz[] = props.quizzes || [];
+    const [selectedQuizId, setSelectedQuizId] = useState<number | null>(null);
+    const selectedQuiz = quizzes.find((q) => q.id === selectedQuizId) || null;
+    useEffect(() => {
+        console.log(selectedQuiz);
+    }, [selectedQuiz]);
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Quiz Taken" />
@@ -20,20 +51,26 @@ export default function Index() {
             <div className="flex h-[calc(100vh-100px)] flex-1 flex-col gap-4 rounded-xl p-4">
                 {/* Info section – only takes needed height */}
                 <div className="shrink-0">
-                    <p>Quiz name : PyTorch Exam</p>
-                    <p>Number of questions : 10</p>
-                    <p>Participants : 41</p>
+                    <p>Quiz name : {selectedQuiz?.user?.name}</p>
+                    <p>Number of questions : {selectedQuiz?.questions?.length ?? 0}</p>
+                    <p>Participants : {/*selectedQuiz participant - Ignore this since the logic hasn't been implemented yet*/}</p>
                 </div>
 
                 {/* Scrollable box grid – takes remaining height */}
                 <div className="flex-1 overflow-auto">
                     <div className="grid grid-cols-4 gap-4">
-                        {boxes.map((_, idx) => (
+                        {quizzes.map((quiz) => (
                             <div
-                                key={idx}
-                                className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-[2/1] overflow-hidden rounded-xl border"
+                                key={quiz.id}
+                                onClick={() => setSelectedQuizId(quiz.id)}
+                                className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-[2/1] cursor-pointer overflow-hidden rounded-xl border"
+                                title={quiz.name}
                             >
-                                <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+                                <img
+                                    src={quiz.thumbnail_url ?? 'placeholder-image.jpg'}
+                                    alt={quiz.name}
+                                    className="absolute inset-0 size-full object-cover"
+                                />
                             </div>
                         ))}
                     </div>
