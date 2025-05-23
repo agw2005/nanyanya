@@ -28,6 +28,11 @@ const mainNavItems: NavItem[] = [
         url: '/quiz-created',
         icon: Wrench,
     },
+    {
+        title: 'Participate',
+        url: '/participate',
+        icon: Pencil,
+    },
 ];
 
 const footerNavItems: NavItem[] = [
