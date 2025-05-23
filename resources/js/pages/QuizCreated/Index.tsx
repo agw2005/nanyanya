@@ -17,11 +17,6 @@ export default function Index() {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Quiz Taken" />
 
-            <div>
-                <Toggle>Created Quiz</Toggle>
-                <Toggle>Participated Quiz</Toggle>
-            </div>
-
             <div className="flex h-[calc(100vh-100px)] flex-1 flex-col gap-4 rounded-xl p-4">
                 {/* Info section – only takes needed height */}
                 <div className="shrink-0">

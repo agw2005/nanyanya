@@ -1,5 +1,4 @@
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
-import { Toggle } from '@/components/ui/toggle';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
@@ -17,11 +16,6 @@ export default function Index() {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Quiz Taken" />
-
-            <div>
-                <Toggle>Created Quiz</Toggle>
-                <Toggle>Participated Quiz</Toggle>
-            </div>
 
             <div className="flex h-[calc(100vh-100px)] flex-1 flex-col gap-4 rounded-xl p-4">
                 {/* Info section – only takes needed height */}
