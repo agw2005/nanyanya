@@ -51,6 +51,16 @@ export default function Index() {
                     <p>Quiz name : {selectedQuiz?.user?.name}</p>
                     <p>Number of questions : {selectedQuiz?.questions?.length ?? 0}</p>
                     <p>Participants : {selectedQuiz?.participants_count ?? 0}</p>
+                    <button
+                        disabled={selectedQuizId === null || (selectedQuiz?.participants_count ?? 0) === 0}
+                        className={`mt-2 rounded bg-red-900 p-2 text-white ${
+                            selectedQuizId !== null && (selectedQuiz?.participants_count ?? 0) > 0
+                                ? 'cursor-pointer'
+                                : 'cursor-not-allowed opacity-50'
+                        }`}
+                    >
+                        See submissions
+                    </button>
                 </div>
 
                 {/* Scrollable box grid – takes remaining height */}
@@ -62,7 +72,13 @@ export default function Index() {
                             return (
                                 <div
                                     key={quiz.id}
-                                    onClick={() => setSelectedQuizId(quiz.id)}
+                                    onClick={() => {
+                                        if (selectedQuizId != quiz.id) {
+                                            setSelectedQuizId(quiz.id);
+                                        } else {
+                                            setSelectedQuizId(null);
+                                        }
+                                    }}
                                     className={`relative aspect-[2/1] cursor-pointer overflow-hidden rounded-xl border ${
                                         isSelected ? 'border-4 border-red-600' : 'border-sidebar-border/70 dark:border-sidebar-border'
                                     }`}
