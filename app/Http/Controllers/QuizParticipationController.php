@@ -14,24 +14,10 @@ class QuizParticipationController extends Controller
     }
 
     public function show(Quiz $quiz){
-        $quiz->load(['questions.options']); // Assuming you have `options()` in Question model
+        $quiz->load(['questions.options']);
 
-        return Inertia::render('quiz-participation', [
-            'quiz' => [
-                'id' => $quiz->id,
-                'name' => $quiz->name,
-                'questions' => $quiz->questions->map(function ($q) {
-                    return [
-                        'id' => $q->id,
-                        'text' => $q->text,
-                        'options' => $q->options->map(fn($opt) => [
-                            'id' => $opt->id,
-                            'label' => $opt->label, // 'A', 'B', etc.
-                            'text' => $opt->text,
-                        ]),
-                    ];
-                }),
-            ],
+        return Inertia::render('Participate/Index', [
+            'quiz' => $quiz,
         ]);
     }
 

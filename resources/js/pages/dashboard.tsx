@@ -75,7 +75,9 @@ export default function Dashboard() {
                         </div>
                         <div className="mt-6 grid grid-cols-4 gap-4">
                             <button className="rounded bg-blue-500 py-2 text-white">{selectedQuiz.maker_name}</button>
-                            <button className="rounded bg-green-500 py-2 text-white">Participate</button>
+                            <button onClick={() => router.get(`/participate/${selectedQuiz.id}`)} className="rounded bg-green-500 py-2 text-white">
+                                Participate
+                            </button>
                             <button
                                 className={`rounded py-2 text-white ${selectedQuiz.liked ? 'bg-yellow-500' : 'bg-gray-400'}`}
                                 onClick={() => handleLike(selectedQuiz.id)}

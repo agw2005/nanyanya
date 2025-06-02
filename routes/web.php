@@ -20,7 +20,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/quiz-taken', [QuizTakenController::class, 'index'])->name('quiz-taken.index');
     Route::get('/quiz-created', [QuizCreatedController::class, 'index'])->name('quiz-created.index');
     Route::post('/quizzes/{quiz}/like', [QuizLikeController::class, 'toggle']);
-    Route::get('/participate', [QuizParticipationController::class, 'index'])->name('participate.index');
+    Route::get('/participate/{quiz}', [QuizParticipationController::class, 'show'])->name('participate.show');
+    // Route::get('/participate', [QuizParticipationController::class, 'index'])->name('participate.index');
 });
 
 Route::middleware(['auth'])->group(function () {

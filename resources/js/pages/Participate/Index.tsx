@@ -3,145 +3,6 @@ import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 import { useState } from 'react';
 
-const placeholderQuiz: Quiz = {
-    name: 'PyTorch Exam',
-    thumbnail_url: 'https://picsum.photos/id/4/500/300',
-    questions: [
-        {
-            question_text: 'What is 7+2',
-            options: [
-                {
-                    label: 'A',
-                    option_text: '1',
-                    is_correct: false,
-                },
-                {
-                    label: 'B',
-                    option_text: '2',
-                    is_correct: false,
-                },
-                {
-                    label: 'C',
-                    option_text: '9',
-                    is_correct: true,
-                },
-                {
-                    label: 'D',
-                    option_text: '3',
-                    is_correct: false,
-                },
-            ],
-        },
-        {
-            question_text: 'What is the third letter of the alphabet?',
-            options: [
-                {
-                    label: 'A',
-                    option_text: 'Z',
-                    is_correct: false,
-                },
-                {
-                    label: 'B',
-                    option_text: 'V',
-                    is_correct: false,
-                },
-                {
-                    label: 'C',
-                    option_text: 'X',
-                    is_correct: true,
-                },
-                {
-                    label: 'D',
-                    option_text: 'C',
-                    is_correct: true,
-                },
-            ],
-        },
-        {
-            question_text: 'What is the winning animal of the chinese zodiac?',
-            options: [
-                {
-                    label: 'A',
-                    option_text: 'Dragon',
-                    is_correct: false,
-                },
-                {
-                    label: 'B',
-                    option_text: 'Rat',
-                    is_correct: true,
-                },
-                {
-                    label: 'C',
-                    option_text: 'Chicken',
-                    is_correct: false,
-                },
-                {
-                    label: 'D',
-                    option_text: 'Pig',
-                    is_correct: false,
-                },
-            ],
-        },
-        {
-            question_text: 'What is the first 3D animated oscard nominee?',
-            options: [
-                {
-                    label: 'A',
-                    option_text: 'Toy Story',
-                    is_correct: true,
-                },
-                {
-                    label: 'B',
-                    option_text: 'Cars',
-                    is_correct: false,
-                },
-                {
-                    label: 'C',
-                    option_text: 'Wall-E',
-                    is_correct: false,
-                },
-                {
-                    label: 'D',
-                    option_text: 'Up',
-                    is_correct: false,
-                },
-            ],
-        },
-        {
-            question_text: 'Which is not a primary color?',
-            options: [
-                {
-                    label: 'A',
-                    option_text: 'Red',
-                    is_correct: false,
-                },
-                {
-                    label: 'B',
-                    option_text: 'Green',
-                    is_correct: false,
-                },
-                {
-                    label: 'C',
-                    option_text: 'Blue',
-                    is_correct: false,
-                },
-                {
-                    label: 'D',
-                    option_text: 'Yellow',
-                    is_correct: true,
-                },
-            ],
-        },
-    ],
-};
-
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Participating in quiz : ' + placeholderQuiz.name,
-        href: `/participate/${placeholderQuiz.name}`,
-    },
-];
-
 type Option = {
     label: string;
     option_text: string;
@@ -164,11 +25,17 @@ type Props = {
 };
 
 export default function Index({ quiz }: Props) {
-    const questionQuantity = placeholderQuiz.questions.length;
+    const breadcrumbs: BreadcrumbItem[] = [
+        {
+            title: 'Participating in quiz : ' + quiz.name,
+            href: `/participate/${quiz.name}`,
+        },
+    ];
+    const questionQuantity = quiz.questions.length;
     const [questionNumber, setQuestionNumber] = useState(0);
-    const currentQuestion = placeholderQuiz.questions[questionNumber];
+    const currentQuestion = quiz.questions[questionNumber];
     const optionLetter = ['A', 'B', 'C', 'D'];
-    const questions = placeholderQuiz.questions;
+    const questions = quiz.questions;
     const [userAnswers, setUserAnswers] = useState<number[]>(Array(questionQuantity).fill(-1));
     const [uncertainAnswers, setUncertainAnswers] = useState<boolean[]>(Array(questionQuantity).fill(false));
     let currentUserAnswer = userAnswers[questionNumber];
@@ -179,7 +46,7 @@ export default function Index({ quiz }: Props) {
         if (noUnansweredQuestions || noUncertainAnswers) {
             let answerEvaluation: boolean[] = new Array(questionQuantity).fill(false);
             for (let i = 0; i < questionQuantity; i++) {
-                answerEvaluation[i] = placeholderQuiz.questions[i].options[userAnswers[i]].is_correct;
+                answerEvaluation[i] = quiz.questions[i].options[userAnswers[i]].is_correct;
             }
             console.log(answerEvaluation);
         }
@@ -187,7 +54,7 @@ export default function Index({ quiz }: Props) {
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title={`${placeholderQuiz.name}`} />
+            <Head title={`${quiz.name}`} />
             <div className="flex h-[calc(100vh-5rem)] bg-[#161617] py-3">
                 {/* Sidebar */}
                 <div className="mr-4 flex w-[calc(20vw)] flex-col items-center gap-4 rounded-md border-2 bg-[#0b0a0b]">
