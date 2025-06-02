@@ -73,24 +73,27 @@ export default function Dashboard() {
                                 className="absolute inset-0 size-full object-cover"
                             />
                         </div>
-                        <div className="mt-6 grid grid-cols-4 gap-4">
-                            <button className="rounded bg-blue-500 py-2 text-white">{selectedQuiz.maker_name}</button>
-                            <button
-                                className="rounded bg-green-500 py-2 text-white"
-                                onClick={() => router.visit(`/quizzes/${selectedQuiz.id}/participate`)}
-                            >
-                                Participate
-                            </button>
-                            <button
-                                className={`rounded py-2 text-white ${selectedQuiz.liked ? 'bg-yellow-500' : 'bg-gray-400'}`}
-                                onClick={() => handleLike(selectedQuiz.id)}
-                            >
-                                {selectedQuiz.liked ? 'Unlike' : 'Like'}
-                            </button>
-                            <button className="rounded bg-red-500 py-2 text-white">
-                                Likes: {selectedQuiz.liked_by_users_count.toLocaleString()}
-                            </button>
-                        </div>
+                    <div className="mt-6 grid grid-cols-4 gap-4">
+    <button className="rounded bg-blue-500 py-2 text-white cursor-pointer">
+        {selectedQuiz.maker_name}
+    </button>
+    <button
+        className="rounded bg-green-500 py-2 text-white cursor-pointer"
+        onClick={() => router.visit(`/quizzes/${selectedQuiz.id}/participate`)}
+    >
+        Participate
+    </button>
+    <button
+        className={`rounded py-2 text-white cursor-pointer ${selectedQuiz.liked ? 'bg-yellow-500' : 'bg-gray-400'}`}
+        onClick={() => handleLike(selectedQuiz.id)}
+    >
+        {selectedQuiz.liked ? 'Unlike' : 'Like'}
+    </button>
+    <button className="rounded bg-red-500 py-2 text-white cursor-pointer">
+        Likes: {selectedQuiz.liked_by_users_count.toLocaleString()}
+    </button>
+</div>
+
                     </div>
                 </div>
             )}
