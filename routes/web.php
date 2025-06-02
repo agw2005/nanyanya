@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\QuizLikeController;
 use App\Http\Controllers\QuizParticipationController;
+use App\Http\Controllers\AnswersController;
 
 Route::get('/', function () {
     return Inertia::render('welcome');
@@ -23,6 +24,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/participate/{quiz}', [QuizParticipationController::class, 'show'])->name('participate.show');
     // Route::get('/participate', [QuizParticipationController::class, 'index'])->name('participate.index');
     Route::post('/quiz/submit', [QuizParticipationController::class, 'submit'])->name('quiz.submit');
+    Route::middleware(['auth'])->post('/answers', [AnswersController::class, 'store'])->name('answers.store');
 
 });
 

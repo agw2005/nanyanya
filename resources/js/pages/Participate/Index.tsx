@@ -10,11 +10,13 @@ type Option = {
 };
 
 type Question = {
+    id: number;
     question_text: string;
     options: Option[];
 };
 
 type Quiz = {
+    id: number;
     name: string;
     thumbnail_url: string;
     questions: Question[];
@@ -28,7 +30,7 @@ export default function Index({ quiz }: Props) {
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: 'Participating in quiz : ' + quiz.name,
-            href: `/participate/${quiz.name}`,
+            href: `/participate/${quiz.id}`,
         },
     ];
     const questionQuantity = quiz.questions.length;
@@ -43,13 +45,20 @@ export default function Index({ quiz }: Props) {
     const submitAnswers = () => {
         const noUnansweredQuestions = !userAnswers.some((value) => value === -1);
         const noUncertainAnswers = !uncertainAnswers.some((value) => value === true);
+        if (noUnansweredQuestions && noUncertainAnswers) {
+            const answerPayload = quiz.questions.map((question, index) => ({
+                question_id: question.id, // make sure question has id
+                selected_option: optionLetter[userAnswers[index]], // 'A', 'B', etc.
+            }));
 
-        if (!noUnansweredQuestions || !noUncertainAnswers) return;
-
-        router.post('/quiz/submit', {
-            quiz_name: quiz.name,
-            answers: userAnswers,
-        });
+            router.post('/answers', {
+                quiz_id: quiz.id,
+                answers: answerPayload,
+            });
+            // No need to manually handle redirect — Inertia will do it automatically based on server response.
+        } else {
+            alert('Please answer all questions and remove uncertain marks before submitting.');
+        }
     };
 
     return (
