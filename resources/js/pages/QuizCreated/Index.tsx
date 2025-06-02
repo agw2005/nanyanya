@@ -51,25 +51,55 @@ export default function Index() {
                     <p>Quiz name : {selectedQuiz?.user?.name}</p>
                     <p>Number of questions : {selectedQuiz?.questions?.length ?? 0}</p>
                     <p>Participants : {selectedQuiz?.participants_count ?? 0}</p>
+                    <button
+                        disabled={selectedQuizId === null || (selectedQuiz?.participants_count ?? 0) === 0}
+                        className={`mt-2 rounded bg-red-900 p-2 text-white ${
+                            selectedQuizId !== null && (selectedQuiz?.participants_count ?? 0) > 0
+                                ? 'cursor-pointer'
+                                : 'cursor-not-allowed opacity-50'
+                        }`}
+                    >
+                        See submissions
+                    </button>
                 </div>
 
                 {/* Scrollable box grid – takes remaining height */}
                 <div className="flex-1 overflow-auto">
                     <div className="grid grid-cols-4 gap-4">
-                        {quizzes.map((quiz) => (
-                            <div
-                                key={quiz.id}
-                                onClick={() => setSelectedQuizId(quiz.id)}
-                                className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-[2/1] cursor-pointer overflow-hidden rounded-xl border"
-                                title={quiz.name}
-                            >
-                                <img
-                                    src={quiz.thumbnail_url ?? 'placeholder-image.jpg'}
-                                    alt={quiz.name}
-                                    className="absolute inset-0 size-full object-cover"
-                                />
-                            </div>
-                        ))}
+                        {quizzes.map((quiz) => {
+                            const isSelected = quiz.id === selectedQuizId;
+
+                            return (
+                                <div
+                                    key={quiz.id}
+                                    onClick={() => {
+                                        if (selectedQuizId != quiz.id) {
+                                            setSelectedQuizId(quiz.id);
+                                        } else {
+                                            setSelectedQuizId(null);
+                                        }
+                                    }}
+                                    className={`relative aspect-[2/1] cursor-pointer overflow-hidden rounded-xl border ${
+                                        isSelected ? 'border-4 border-red-600' : 'border-sidebar-border/70 dark:border-sidebar-border'
+                                    }`}
+                                    title={quiz.name}
+                                >
+                                    {/* Image */}
+                                    <img
+                                        src={quiz.thumbnail_url ?? 'placeholder-image.jpg'}
+                                        alt={quiz.name}
+                                        className={`absolute inset-0 h-full w-full object-cover transition duration-300 ${isSelected ? 'brightness-50' : 'brightness-100'}`}
+                                    />
+
+                                    {/* Selected Overlay */}
+                                    {isSelected && (
+                                        <div className="absolute inset-0 flex items-center justify-center">
+                                            <span className="text-lg font-bold text-white select-none">Selected</span>
+                                        </div>
+                                    )}
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
             </div>
