@@ -28,6 +28,7 @@ type Quiz = {
     thumbnail_url: string | null;
     user: User;
     questions: Question[];
+    participants_count?: number;
 };
 
 type Props = {
@@ -49,7 +50,7 @@ export default function Index() {
                 <div className="shrink-0">
                     <p>Quiz name : {selectedQuiz?.user?.name}</p>
                     <p>Number of questions : {selectedQuiz?.questions?.length ?? 0}</p>
-                    <p>Participants : {/*selectedQuiz participant - Ignore this since the logic hasn't been implemented yet*/}</p>
+                    <p>Participants : {selectedQuiz?.participants_count ?? 0}</p>
                 </div>
 
                 {/* Scrollable box grid – takes remaining height */}
