@@ -33,12 +33,12 @@ const mainNavItems: NavItem[] = [
 const footerNavItems: NavItem[] = [
     {
         title: 'Repository',
-        url: 'https://github.com/laravel/react-starter-kit',
+        url: 'https://github.com/agw2005/nanyanya',
         icon: Folder,
     },
     {
         title: 'Documentation',
-        url: 'https://laravel.com/docs/starter-kits',
+        url: 'https://docs.google.com/document/d/1iB67vTSJZnU37vcEuYlXQ_PPENWRjMf1C7oUduMxCSw/edit?usp=sharing',
         icon: BookOpen,
     },
 ];
