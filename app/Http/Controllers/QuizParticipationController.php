@@ -43,4 +43,18 @@ class QuizParticipationController extends Controller
 
         return response()->json(['status' => 'saved']);
     }
+
+    public function submit(Request $request)
+    {
+        $validated = $request->validate([
+            'quiz_name' => 'required|string',
+            'answers' => 'required|array',
+            'answers.*' => 'integer|min:0',
+        ]);
+
+        // Optionally store or evaluate answers here
+
+        return to_route('dashboard')->with('success', 'Quiz submitted successfully!');
+    }
+
 }

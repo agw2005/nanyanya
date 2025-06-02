@@ -1,6 +1,6 @@
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
-import { Head } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import { useState } from 'react';
 
 type Option = {
@@ -43,13 +43,13 @@ export default function Index({ quiz }: Props) {
     const submitAnswers = () => {
         const noUnansweredQuestions = !userAnswers.some((value) => value === -1);
         const noUncertainAnswers = !uncertainAnswers.some((value) => value === true);
-        if (noUnansweredQuestions || noUncertainAnswers) {
-            let answerEvaluation: boolean[] = new Array(questionQuantity).fill(false);
-            for (let i = 0; i < questionQuantity; i++) {
-                answerEvaluation[i] = quiz.questions[i].options[userAnswers[i]].is_correct;
-            }
-            console.log(answerEvaluation);
-        }
+
+        if (!noUnansweredQuestions || !noUncertainAnswers) return;
+
+        router.post('/quiz/submit', {
+            quiz_name: quiz.name,
+            answers: userAnswers,
+        });
     };
 
     return (
@@ -84,7 +84,12 @@ export default function Index({ quiz }: Props) {
                     </div>
                     <button
                         onClick={submitAnswers}
-                        className="rounded-2xl bg-green-900 p-5 py-2 font-bold text-white hover:bg-blue-700 active:bg-red-900"
+                        disabled={userAnswers.some((v) => v === -1) || uncertainAnswers.some((v) => v)}
+                        className={`rounded-2xl p-5 py-2 font-bold text-white ${
+                            userAnswers.some((v) => v === -1) || uncertainAnswers.some((v) => v)
+                                ? 'cursor-not-allowed bg-gray-700'
+                                : 'bg-green-900 hover:bg-blue-700 active:bg-red-900'
+                        }`}
                     >
                         Submit answers
                     </button>

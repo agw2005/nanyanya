@@ -22,6 +22,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/quizzes/{quiz}/like', [QuizLikeController::class, 'toggle']);
     Route::get('/participate/{quiz}', [QuizParticipationController::class, 'show'])->name('participate.show');
     // Route::get('/participate', [QuizParticipationController::class, 'index'])->name('participate.index');
+    Route::post('/quiz/submit', [QuizParticipationController::class, 'submit'])->name('quiz.submit');
+
 });
 
 Route::middleware(['auth'])->group(function () {
