@@ -141,7 +141,9 @@ export default function Index({ quiz }: Props) {
                             <div className="mt-2 flex gap-2">
                                 <button //Back-button
                                     onClick={() => {
-                                        questionNumber == 0 ? setQuestionNumber(questionNumber) : setQuestionNumber(questionNumber - 1);
+                                        if (questionNumber > 0) {
+                                            setQuestionNumber(questionNumber - 1);
+                                        }
                                     }}
                                     className="flex h-10 w-10 items-center justify-center rounded-2xl"
                                 >
@@ -155,9 +157,9 @@ export default function Index({ quiz }: Props) {
                                 </button>
                                 <button //Previous-button
                                     onClick={() => {
-                                        questionNumber >= questionQuantity - 1
-                                            ? setQuestionNumber(questionNumber)
-                                            : setQuestionNumber(questionNumber + 1);
+                                        if (questionNumber < questionQuantity - 1) {
+                                            setQuestionNumber(questionNumber + 1);
+                                        }
                                     }}
                                     className="flex h-10 w-10 items-center justify-center rounded-2xl"
                                 >

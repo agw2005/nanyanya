@@ -19,7 +19,6 @@ type User = {
 type Question = {
     id: number;
     question_text: string;
-    options: any[];
 };
 
 type Quiz = {
