@@ -60,7 +60,7 @@ export default function Index({ quizzes }: Props) {
 
             {selectedQuiz && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={() => setSelectedQuiz(null)}>
-                    <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-xl bg-gray-900 p-8" onClick={(e) => e.stopPropagation()}>
+                    <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-xl bg-white dark:bg-gray-900 p-8" onClick={(e) => e.stopPropagation()}>
                         <h2 className="mb-6 text-2xl font-bold">Quiz Details: {selectedQuiz.name}</h2>
                         <div className="space-y-8">
                             {selectedQuiz.questions.map((question, idx) => {
@@ -78,11 +78,11 @@ export default function Index({ quizzes }: Props) {
                                                 return (
                                                     <div
                                                         key={choice.id}
-                                                        className={`rounded border px-4 py-2 transition-all ${isCorrect ? 'border-green-500' : 'border-gray-500 bg-[#262626]'} ${isUser ? 'border-blue-400 ring-2 ring-blue-400' : ''} flex items-center`}
+                                                        className={`rounded border px-4 py-2 transition-all ${isCorrect ? 'dark:border-green-500 dark:border-2 border-green-900 border-4' : 'border-gray-500 dark:bg-[#262626]'} ${isUser ? 'border-blue-400 ring-2 ring-blue-400' : ''} flex items-center`}
                                                     >
                                                         {choice.option_text}
-                                                        {isCorrect && <span className="ml-2 font-bold text-green-300">(Correct)</span>}
-                                                        {isUser && !isCorrect && <span className="ml-2 font-bold text-blue-300">(Your choice)</span>}
+                                                        {isCorrect && <span className="ml-2 font-bold dark:text-green-300 text-green-600">(Correct)</span>}
+                                                        {isUser && !isCorrect && <span className="ml-2 font-bold dark:text-blue-300 text-blue-600">(Your choice)</span>}
                                                     </div>
                                                 );
                                             })}

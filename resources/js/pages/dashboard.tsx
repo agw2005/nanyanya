@@ -74,17 +74,20 @@ export default function Dashboard() {
                             />
                         </div>
                         <div className="mt-6 grid grid-cols-4 gap-4">
-                            <button className="rounded bg-blue-500 py-2 text-white">{selectedQuiz.maker_name}</button>
-                            <button onClick={() => router.get(`/participate/${selectedQuiz.id}`)} className="rounded bg-green-500 py-2 text-white">
+                            <button className="rounded bg-blue-700 py-2 text-white dark:bg-blue-500">{selectedQuiz.maker_name}</button>
+                            <button
+                                onClick={() => router.get(`/participate/${selectedQuiz.id}`)}
+                                className="rounded bg-green-700 py-2 text-white dark:bg-green-500"
+                            >
                                 Participate
                             </button>
                             <button
-                                className={`rounded py-2 text-white ${selectedQuiz.liked ? 'bg-yellow-500' : 'bg-gray-400'}`}
+                                className={`rounded py-2 text-white ${selectedQuiz.liked ? 'bg-yellow-900 dark:bg-yellow-700' : 'bg-gray-700 dark:bg-gray-400'}`}
                                 onClick={() => handleLike(selectedQuiz.id)}
                             >
                                 {selectedQuiz.liked ? 'Unlike' : 'Like'}
                             </button>
-                            <button className="rounded bg-red-500 py-2 text-white">
+                            <button className="rounded bg-red-700 py-2 text-white dark:bg-red-500">
                                 Likes: {selectedQuiz.liked_by_users_count.toLocaleString()}
                             </button>
                         </div>

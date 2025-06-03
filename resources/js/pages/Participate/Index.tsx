@@ -64,28 +64,28 @@ export default function Index({ quiz }: Props) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title={`${quiz.name}`} />
-            <div className="flex h-[calc(100vh-5rem)] bg-[#161617] py-3">
+            <div className="flex h-[calc(100vh-5rem)] bg-[#d0d0d1] p-3 dark:bg-[#161617]">
                 {/* Sidebar */}
-                <div className="mr-4 flex w-[calc(20vw)] flex-col items-center gap-4 rounded-md border-2 bg-[#0b0a0b]">
-                    <div className="mt-4 text-3xl font-semibold text-white underline decoration-2">Questions</div>
+                <div className="mr-4 flex w-[calc(20vw)] flex-col items-center gap-4 rounded-md border-2 border-[#808080] bg-white dark:border-white dark:bg-[#0b0a0b]">
+                    <div className="mt-4 text-3xl font-semibold text-black underline decoration-2 dark:text-white">Questions</div>
                     <div className="grid w-7/8 grid-cols-5 gap-2">
                         {questions.map((_, idx) => (
                             <div
                                 className={`flex aspect-square items-center justify-center rounded text-3xl font-bold select-none ${
-                                    userAnswers[idx] > -1
-                                        ? 'bg-green-900 text-white hover:bg-green-300 hover:text-black'
-                                        : questionNumber === idx && uncertainAnswers[idx] === true
-                                          ? 'bg-gradient-to-b from-yellow-900 to-blue-900 text-white hover:bg-gradient-to-b hover:from-yellow-300 hover:to-blue-300 hover:text-black'
-                                          : uncertainAnswers[idx] === true
+                                    uncertainAnswers[idx] && questionNumber === idx
+                                        ? 'bg-gradient-to-b from-yellow-900 to-blue-900 text-white hover:from-yellow-300 hover:to-blue-300 hover:text-black'
+                                        : userAnswers[idx] > -1 && questionNumber === idx
+                                          ? 'bg-gradient-to-b from-green-900 to-blue-900 text-white hover:from-green-300 hover:to-blue-300 hover:text-black'
+                                          : uncertainAnswers[idx]
                                             ? 'bg-yellow-900 text-white hover:bg-yellow-300 hover:text-black'
-                                            : questionNumber === idx
-                                              ? 'bg-blue-900 text-white hover:bg-blue-300 hover:text-black'
-                                              : 'bg-[#262626] text-white hover:bg-white hover:text-black'
-                                } `}
+                                            : userAnswers[idx] > -1
+                                              ? 'bg-green-900 text-white hover:bg-green-600 hover:text-black dark:hover:bg-green-300'
+                                              : questionNumber === idx
+                                                ? 'bg-blue-900 text-white hover:bg-blue-300 hover:text-black'
+                                                : 'bg-[#262626] text-white hover:bg-[#5c5c5d] hover:text-white dark:hover:bg-white dark:hover:text-black'
+                                }`}
                                 key={idx}
-                                onClick={() => {
-                                    setQuestionNumber(idx);
-                                }}
+                                onClick={() => setQuestionNumber(idx)}
                             >
                                 <p className="text-center">{idx + 1}</p>
                             </div>
@@ -102,22 +102,24 @@ export default function Index({ quiz }: Props) {
                     >
                         Submit answers
                     </button>
-                    <div className={`${uncertainAnswers.some((value) => value == true) ? '' : 'hidden'} px-12 text-center text-white`}>
+                    <div
+                        className={`${uncertainAnswers.some((value) => value == true) ? '' : 'hidden'} px-12 text-center text-black dark:text-white`}
+                    >
                         No questions has to be marked as uncertain to submit your answer
                     </div>
                 </div>
                 {/* Main Content */}
-                <div className="relative flex flex-1 flex-col overflow-y-auto rounded-md border-2 bg-[#0b0a0b] p-6">
+                <div className="relative flex flex-1 flex-col overflow-y-auto rounded-md border-2 border-[#808080] bg-white p-6 dark:border-white dark:bg-[#0b0a0b]">
                     {/* Question */}
                     <div className="mb-4 flex items-start justify-between">
                         <div className="flex flex-1 items-center">
-                            <span className="text-3xl font-bold text-white">
+                            <span className="text-3xl font-bold text-black dark:text-white">
                                 {questionNumber + 1}. {currentQuestion.question_text}
                             </span>
                         </div>
                         <div className="gap-2-500 mt-auto flex flex-col items-end select-none">
                             <label
-                                className={`flex items-center gap-2 px-2 py-1 select-none ${uncertainAnswers[questionNumber] ? 'bg-yellow-800' : 'bg-yellow-300'} rounded border`}
+                                className={`flex items-center gap-2 px-2 py-1 select-none ${uncertainAnswers[questionNumber] ? 'bg-yellow-800' : 'bg-yellow-600 dark:bg-yellow-300'} rounded border-2 border-black dark:border`}
                             >
                                 <input
                                     onChange={() => {
@@ -148,7 +150,7 @@ export default function Index({ quiz }: Props) {
                                     className="flex h-10 w-10 items-center justify-center rounded-2xl"
                                 >
                                     <svg
-                                        className="fill-white hover:fill-red-900 active:fill-blue-900"
+                                        className="fill-black hover:fill-red-900 active:fill-blue-900 dark:fill-white"
                                         xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 448 512"
                                     >
@@ -164,7 +166,7 @@ export default function Index({ quiz }: Props) {
                                     className="flex h-10 w-10 items-center justify-center rounded-2xl"
                                 >
                                     <svg
-                                        className="fill-white hover:fill-red-900 active:fill-blue-900"
+                                        className="fill-black hover:fill-red-900 active:fill-blue-900 dark:fill-white"
                                         xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 448 512"
                                     >
@@ -179,7 +181,7 @@ export default function Index({ quiz }: Props) {
                         {currentQuestion.options.map((option, idx) => (
                             <div
                                 key={idx}
-                                className={`${userAnswers[questionNumber] == idx ? 'hover:bg-green-500 hover:text-white' : 'hover:bg-gray-700 hover:text-white'} cursor-pointer rounded border border-[#161617] px-4 py-2 text-2xl font-bold active:bg-black active:text-red-500 ${userAnswers[questionNumber] == idx ? 'bg-green-900 text-white' : 'bg-[#161617] text-white'}`}
+                                className={`${userAnswers[questionNumber] == idx ? 'hover:bg-green-500 hover:text-black dark:hover:text-white' : 'hover:bg-gray-700 hover:text-white'} cursor-pointer rounded border border-[#161617] px-4 py-2 text-2xl font-bold active:bg-black active:text-red-500 ${userAnswers[questionNumber] == idx ? 'bg-green-900 text-white' : 'bg-[#d0d0d1] text-black dark:bg-[#161617] dark:text-white'}`}
                                 onClick={() => {
                                     const tempUserAnswers = [...userAnswers];
                                     if (currentUserAnswer == idx) {
