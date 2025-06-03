@@ -1,7 +1,7 @@
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -44,6 +44,10 @@ type Props = {
 };
 
 export default function Index({ quizzes }: Props) {
+    useEffect(() => {
+        console.log(quizzes);
+    });
+
     const [selectedQuiz, setSelectedQuiz] = useState<Quiz | null>(null);
 
     const getCorrectCount = (quiz: Quiz) => {

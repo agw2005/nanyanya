@@ -24,7 +24,6 @@ class QuizTakenController extends Controller
             }
         ])
         ->get();
-        \Log::info('Quiz-taken index method hit', $quizzes->all());
         return Inertia::render('QuizTaken/Index', [
             'quizzes' => $quizzes,
         ]);
