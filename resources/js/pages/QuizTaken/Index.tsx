@@ -75,7 +75,7 @@ export default function Index({ quizzes }: Props) {
                                         </div>
                                         <div className="grid grid-cols-1 gap-2">
                                             {question.options.map((choice) => {
-                                                const isUser = answer?.selected_option === choice.label;
+                                                const isUser = answer?.selected_option?.toUpperCase() === choice.label.toUpperCase();
                                                 const isCorrect = choice.is_correct === 1;
 
                                                 return (
@@ -89,6 +89,11 @@ export default function Index({ quizzes }: Props) {
                                                         )}
                                                         {isUser && !isCorrect && (
                                                             <span className="ml-2 font-bold text-blue-600 dark:text-blue-300">(Your choice)</span>
+                                                        )}
+                                                        {isUser && isCorrect && (
+                                                            <span className="ml-2 font-bold text-green-600 dark:text-green-300">
+                                                                (Your correct choice)
+                                                            </span>
                                                         )}
                                                     </div>
                                                 );
