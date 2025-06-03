@@ -1,13 +1,5 @@
-import React from 'react';
-import { ImgHTMLAttributes } from 'react';
+import type { ImgHTMLAttributes } from 'react';
 
 export default function AppLogoIcon(props: ImgHTMLAttributes<HTMLImageElement>) {
-    return (
-        <img
-            src="logooo.png"
-            alt="App Logo"
-            {...props}
-            style={{ width: 'auto', height: '40px', ...props.style }}
-        />
-    );
+  return <img src="/logooo.svg" alt="App Logo" {...props} />;
 }
