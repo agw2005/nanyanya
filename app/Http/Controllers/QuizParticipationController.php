@@ -26,12 +26,12 @@ class QuizParticipationController extends Controller
             'question_id' => 'required|exists:questions,id',
             'selected_option' => 'required|string|in:A,B,C,D', // Customize if more/less options
         ]);
-
+    
         $questionId = $request->question_id;
-        $option = $request->selected_option;
-
+        $option = strtoupper($request->selected_option); // <- Normalize here
+    
         $user = Auth::user();
-
+    
         $answer = \App\Models\Answer::updateOrCreate(
             [
                 'user_id' => $user->id,
@@ -40,9 +40,9 @@ class QuizParticipationController extends Controller
             ],
             ['selected_option' => $option]
         );
-
+    
         return response()->json(['status' => 'saved']);
-    }
+    }    
 
     public function submit(Request $request)
     {
