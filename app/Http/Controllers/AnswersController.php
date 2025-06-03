@@ -11,6 +11,7 @@ class AnswersController extends Controller
 {
     public function store(Request $request)
     {
+        \Log::info('Store method hit', $request->all());
         $request->validate([
             'quiz_id' => 'required|exists:quizzes,id',
             'answers' => 'required|array',
