@@ -1,7 +1,7 @@
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -44,10 +44,6 @@ type Props = {
 };
 
 export default function Index({ quizzes }: Props) {
-    useEffect(() => {
-        console.log(quizzes);
-    });
-
     const [selectedQuiz, setSelectedQuiz] = useState<Quiz | null>(null);
 
     const getCorrectCount = (quiz: Quiz) => {
@@ -80,7 +76,7 @@ export default function Index({ quizzes }: Props) {
                                         <div className="grid grid-cols-1 gap-2">
                                             {question.options.map((choice) => {
                                                 const isUser = answer?.selected_option?.toUpperCase() === choice.label.toUpperCase();
-                                                const isCorrect = choice.is_correct === 1;
+                                                const isCorrect = choice.is_correct > 0;
 
                                                 return (
                                                     <div
@@ -125,7 +121,9 @@ export default function Index({ quizzes }: Props) {
                         <div
                             key={quiz.id}
                             className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-[2/1] cursor-pointer overflow-hidden rounded-xl border"
-                            onClick={() => setSelectedQuiz(quiz)}
+                            onClick={() => {
+                                setSelectedQuiz(quiz);
+                            }}
                         >
                             <img
                                 src={quiz.thumbnail_url ?? 'placeholder-image.jpg'}
