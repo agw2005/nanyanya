@@ -123,8 +123,6 @@ export default function Index({ quizzes }: Props) {
                             className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-[2/1] cursor-pointer overflow-hidden rounded-xl border"
                             onClick={() => {
                                 setSelectedQuiz(quiz);
-                                console.log(correct)
-                                console.log(score)
                             }}
                         >
                             <img
@@ -135,9 +133,6 @@ export default function Index({ quizzes }: Props) {
                             <div className="absolute right-0 bottom-0 left-0 bg-black/60 p-2 text-sm text-white">
                                 <div>{quiz.name}</div>
                                 <div>By: {quiz.user.name}</div>
-                                <div>
-                                    Score: {score}% ({correct}/{quiz.questions.length})
-                                </div>
                             </div>
                         </div>
                     );
