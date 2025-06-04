@@ -123,6 +123,8 @@ export default function Index({ quizzes }: Props) {
                             className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-[2/1] cursor-pointer overflow-hidden rounded-xl border"
                             onClick={() => {
                                 setSelectedQuiz(quiz);
+                                console.log(correct)
+                                console.log(score)
                             }}
                         >
                             <img
